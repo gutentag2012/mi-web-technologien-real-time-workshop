@@ -1,0 +1,26 @@
+# fly.toml app configuration file generated for mi-web-technologien-real-time-workshop-frontend on 2024-05-05T15:32:02+02:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'mi-web-technologien-real-time-workshop-frontend'
+primary_region = 'ams'
+
+[build]
+
+[http_service]
+  internal_port = 3000
+  force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ['app']
+
+[[vm]]
+  size = 'shared-cpu-1x'
+
+[build.args]
+  PUBLIC_BACKEND_URL="https://mi-web-technologien-real-time-workshop-backend.fly.dev"
+
+[env]
+  PUBLIC_BACKEND_URL="https://mi-web-technologien-real-time-workshop-backend.fly.dev"

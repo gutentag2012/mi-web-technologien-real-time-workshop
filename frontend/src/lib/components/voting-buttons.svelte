@@ -1,6 +1,7 @@
 <script lang="ts">
   import {onMount} from "svelte";
   import {authToken} from "$lib";
+  import * as env from '$env/static/public'
 
   export let poll: string
 
@@ -10,7 +11,7 @@
   $: votingPercents = votes.map(vote => vote / Math.max(1, totalVotes) * 100)
 
   onMount(() => {
-    const eventSource = new EventSource(`http://localhost:3000/voting/${poll}`)
+    const eventSource = new EventSource(`${env.PUBLIC_BACKEND_URL}/voting/${poll}`)
 
     eventSource.addEventListener("votes", e => votes = JSON.parse(e.data))
     eventSource.addEventListener("votes.reset", () => {
@@ -25,7 +26,7 @@
         ownVote = voteIndex
     }
 
-    fetch(`http://localhost:3000/voting/${poll}`, {
+    fetch(`${env.PUBLIC_BACKEND_URL}/voting/${poll}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -35,7 +36,7 @@
   }
 
   const reset = () => {
-    fetch(`http://localhost:3000/voting/${poll}/reset`, {
+    fetch(`${env.PUBLIC_BACKEND_URL}/voting/${poll}/reset`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",

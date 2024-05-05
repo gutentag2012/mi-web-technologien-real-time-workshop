@@ -1,13 +1,14 @@
 <script lang="ts">
     import {goto} from "$app/navigation";
     import {authToken} from "$lib";
+    import * as env from '$env/static/public'
 
     let username = ""
     let password = ""
 
     const handleSubmit= async (event: Event) => {
         event.preventDefault()
-      const {token} = await fetch("http://localhost:3000/auth/login", {
+      const {token} = await fetch(`${env.PUBLIC_BACKEND_URL}/auth/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
