@@ -25,18 +25,26 @@ export class VotingController {
 
     response.write(`event: votes\ndata: ${JSON.stringify(this.votingService.getVotesForOption(poll))}\n\n`);
 
-    this.eventEmitter.on('votes.changed', ({poll: changedPoll, votes}) => {
+    const ChangeListener = ({poll: changedPoll, votes}: {poll: string, votes: number[]}) => {
       if (poll !== changedPoll) {
         return;
       }
       response.write(`event: votes\ndata: ${JSON.stringify(votes)}\n\n`);
-    });
+    }
+    this.eventEmitter.on('votes.changed', ChangeListener);
 
-    this.eventEmitter.on('votes.reset', ({poll: changedPoll}) => {
+    const ResetListener = ({poll: changedPoll}: {poll: string}) => {
       if (poll !== changedPoll) {
         return;
       }
       response.write(`event: votes.reset\ndata:\n\n`);
+    }
+    this.eventEmitter.on('votes.reset', ResetListener);
+
+    response.on('close', () => {
+      console.log("Closed client")
+      this.eventEmitter.off('votes.changed', ChangeListener);
+      this.eventEmitter.off('votes.reset', ResetListener);
     });
   }
 

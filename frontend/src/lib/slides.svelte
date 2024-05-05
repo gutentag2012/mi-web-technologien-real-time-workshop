@@ -10,11 +10,12 @@
   import Agenda from './slides/2_AgendaSlide.svelte'
   import Overview from './slides/3_OverviewSlide.svelte'
 
-  import {revealSlides} from "$lib/index";
+  import {authToken, revealSlides} from "$lib/index";
   import Reveal from "reveal.js";
   import Markdown from "reveal.js/plugin/markdown/markdown";
   import Highlight from "reveal.js/plugin/highlight/highlight";
   import Notes from "reveal.js/plugin/notes/notes";
+  import * as env from '$env/static/public'
 
   onMount(() => {
     revealSlides.set(new Reveal({
@@ -24,10 +25,34 @@
       hash: true,
       disableLayout: true,
       controlsTutorial: false,
+      controls: !!$authToken,
       progress: false
     }))
 
     $revealSlides.initialize()
+
+    if(!$authToken) {
+      console.log("Listen to slide change event")
+      const slideEventSource = new EventSource(`${env.PUBLIC_BACKEND_URL}/slide-control/listen`)
+
+      slideEventSource.addEventListener("slide.changed", sse => {
+        const eventData = JSON.parse(sse.data)
+        $revealSlides.slide(eventData.indexH, eventData.indexV)
+      })
+
+      return
+    }
+
+    $revealSlides.on('slidechanged', (event: {indexh: number; indexv: number}) => {
+      fetch(`${env.PUBLIC_BACKEND_URL}/slide-control/jumpTo`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+            'Authorization': `Bearer ${$authToken}`
+        },
+        body: JSON.stringify({ indexH: event.indexh, indexV: event.indexv })
+      })
+    })
   })
 </script>
 
