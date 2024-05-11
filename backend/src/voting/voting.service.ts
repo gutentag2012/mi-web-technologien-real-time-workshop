@@ -24,6 +24,10 @@ export class VotingService {
     return this._votes[optionId] ?? [];
   }
 
+  public getAllVotes() {
+    return this._votes;
+  }
+
   public resetVotes(poll: string) {
     this._votes[poll] = [];
     this.eventEmitter.emit('votes.reset', {poll});

@@ -14,8 +14,8 @@ export class VotingController {
     this.votingService.voteForOption(poll, vote.voteIndex);
   }
 
-  @Get(':poll')
-  public getVotesForOption(@Param("poll") poll: string, @Res() response: Response) {
+  @Get()
+  public getVotesForOption(@Res() response: Response) {
     response.writeHead(200, {
       'Content-Type': 'text/event-stream',
       'Cache-Control': 'no-cache',
@@ -23,26 +23,19 @@ export class VotingController {
     });
     response.flushHeaders()
 
-    response.write(`event: votes\ndata: ${JSON.stringify(this.votingService.getVotesForOption(poll))}\n\n`);
+    response.write(`event: votes.init\ndata: ${JSON.stringify(this.votingService.getAllVotes())}\n\n`);
 
-    const ChangeListener = ({poll: changedPoll, votes}: {poll: string, votes: number[]}) => {
-      if (poll !== changedPoll) {
-        return;
-      }
-      response.write(`event: votes\ndata: ${JSON.stringify(votes)}\n\n`);
+    const ChangeListener = (data: {poll: string, votes: number[]}) => {
+      response.write(`event: votes.changed\ndata: ${JSON.stringify(data)}\n\n`);
     }
     this.eventEmitter.on('votes.changed', ChangeListener);
 
-    const ResetListener = ({poll: changedPoll}: {poll: string}) => {
-      if (poll !== changedPoll) {
-        return;
-      }
-      response.write(`event: votes.reset\ndata:\n\n`);
+    const ResetListener = (data: {poll: string}) => {
+      response.write(`event: votes.reset\ndata: ${JSON.stringify(data)}\n\n`);
     }
     this.eventEmitter.on('votes.reset', ResetListener);
 
     response.on('close', () => {
-      console.log("Closed client")
       this.eventEmitter.off('votes.changed', ChangeListener);
       this.eventEmitter.off('votes.reset', ResetListener);
     });
