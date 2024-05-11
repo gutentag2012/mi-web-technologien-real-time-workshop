@@ -1,0 +1,26 @@
+@startuml
+!pragma teoz true
+
+activate Client
+
+Client -> Server: GET /data
+activate Server
+Server -> Server: Get current data
+Server --> Client: Return Data 1
+deactivate Server
+
+Client -> Server: GET /data
+activate Server
+Server -> Server: Wait for Update
+Server --x Client: Timeout
+deactivate Server
+
+{start1} Client -> Server: GET /data
+activate Server
+Server -> Server: Wait for Update
+Server -> Server: Update Data
+{end1} Server --> Client: Return Data 2
+deactivate Server
+
+deactivate Client
+@enduml
