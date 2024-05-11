@@ -1,14 +1,17 @@
 <script lang="ts">
-  import { onMount } from 'svelte'
+  import {onMount} from 'svelte'
 
   import 'reveal.js/dist/reveal.css'
   import 'reveal.js/dist/theme/night.css'
   import 'reveal.js/plugin/highlight/monokai.css'
 
-  import Presentation from './slides/presentation.svelte'
+  import Slide from "$lib/components/slide.svelte";
   import Intro from './slides/1_IntroSlide.svelte'
   import Agenda from './slides/2_AgendaSlide.svelte'
   import Overview from './slides/3_OverviewSlide.svelte'
+  import Polling from './slides/4_1_PollingSlide.svelte'
+  import ShortPolling from './slides/4_2_ShortPollingSlide.svelte'
+  import LongPolling from './slides/4_3_LongPollingSlide.svelte'
 
   import {authToken, revealSlides} from "$lib/index";
   import Reveal from "reveal.js";
@@ -25,14 +28,13 @@
       hash: true,
       disableLayout: true,
       controlsTutorial: false,
-      controls: !!$authToken,
+      controls: true,
       progress: false
     }))
 
     $revealSlides.initialize()
 
-    if(!$authToken) {
-      console.log("Listen to slide change event")
+    if (!$authToken) {
       const slideEventSource = new EventSource(`${env.PUBLIC_BACKEND_URL}/slide-control/listen`)
 
       slideEventSource.addEventListener("slide.changed", sse => {
@@ -43,14 +45,14 @@
       return
     }
 
-    $revealSlides.on('slidechanged', (event: {indexh: number; indexv: number}) => {
-      fetch(`${env.PUBLIC_BACKEND_URL}/slide-control/jumpTo`, {
+    $revealSlides.on('slidechanged', (event: { indexh: number; indexv: number }) => {
+      return fetch(`${env.PUBLIC_BACKEND_URL}/slide-control/jumpTo`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-            'Authorization': `Bearer ${$authToken}`
+          'Authorization': `Bearer ${$authToken}`
         },
-        body: JSON.stringify({ indexH: event.indexh, indexV: event.indexv })
+        body: JSON.stringify({indexH: event.indexh, indexV: event.indexv})
       })
     })
   })
@@ -58,9 +60,15 @@
 
 <div class="reveal">
     <div class="slides">
-        <Intro />
-        <Agenda />
-        <Overview />
-        <Presentation />
+        <Intro/>
+        <Agenda/>
+
+        <Overview/>
+
+        <Slide animate>
+            <Polling/>
+            <ShortPolling/>
+            <LongPolling/>
+        </Slide>
     </div>
 </div>

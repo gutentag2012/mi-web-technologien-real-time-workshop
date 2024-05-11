@@ -5,7 +5,7 @@ import Agenda from "$lib/components/Agenda.svelte";
 
 <Slide animate className="h-full">
     <div class="flex flex-col h-full items-center justify-center">
-        <h3>Agenda</h3>
+        <h4 data-id="title">Agenda</h4>
         <Agenda big={true} />
     </div>
 </Slide>

@@ -7,23 +7,20 @@
 <ol class={big ? "text-xl" : "fixed top-4 left-4 text-sm"}>
     <li class:text-amber-300={selection === 0} class:opacity-60={!big && selection !== 0}>
         <TimeBadge big={big} time={5} />
-        <span>Was ist Echtzeit Kommunikation und wofür braucht man das?</span>
+        <span>Was ist Echtzeit Kommunikation?</span>
     </li>
     <li class:text-amber-300={selection === 1} class:opacity-60={!big && selection !== 1} class="mt-2">
         <TimeBadge big={big} time={15} />
         <span>Kapitel 1: Short Polling & Long Polling</span>
     </li>
-    <li class:text-amber-300={selection === 1} class:opacity-60={!big && selection !== 1}>
-        <TimeBadge big={big} time={20} />
-        <span>Aufgabe 1</span>
-    </li>
+    <!-- TODO If there is time, also add an assignment here -->
     <li class:text-amber-300={selection === 2} class:opacity-60={!big && selection !== 2} class="mt-2">
         <TimeBadge big={big} time={15} />
-        <span>Kapitel 2: Server Sent Events</span>
+        <span>Kapitel 2: Server-Sent Events</span>
     </li>
     <li class:text-amber-300={selection === 2} class:opacity-60={!big && selection !== 2}>
         <TimeBadge big={big} time={20} />
-        <span>Aufgabe 2</span>
+        <span>Aufgabe: Benachrichtigungen</span>
     </li>
     <li class:text-amber-300={selection === 3} class:opacity-60={!big && selection !== 3} class="mt-2">
         <TimeBadge big={big} time={15} />
@@ -31,14 +28,14 @@
     </li>
     <li class:text-amber-300={selection === 3} class:opacity-60={!big && selection !== 3}>
         <TimeBadge big={big} time={20} />
-        <span>Aufgabe 3</span>
+        <span>Aufgabe: Live-Chat</span>
     </li>
     <li class:text-amber-300={selection === 4} class:opacity-60={!big && selection !== 4} class="mt-2">
         <TimeBadge big={big} time={10} />
-        <span>Andere Technologien (WebRTC, WebTransport)</span>
+        <span>Andere Technologien</span>
     </li>
-    <li class:text-amber-300={selection === 4} class:opacity-60={!big && selection !== 4}>
+    <li class:text-amber-300={selection === 5} class:opacity-60={!big && selection !== 4} class="mt-2">
         <TimeBadge big={big} time={5} />
-        <span>Comparison</span>
+        <span>Zusammenfassung</span>
     </li>
 </ol>
