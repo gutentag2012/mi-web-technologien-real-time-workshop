@@ -13,6 +13,12 @@ export class SlideControlController {
     this.eventEmitter.emit("jumpToSlide", slide);
   }
 
+  @UseGuards(AuthGuard)
+  @Post("pause")
+  pause(@Body() pausedAt: { timeStarted: number }) {
+    this.eventEmitter.emit("pause", pausedAt.timeStarted);
+  }
+
   @Get("listen")
   listenToSlide(@Res() response: Response) {
     response.writeHead(200, {
@@ -22,13 +28,18 @@ export class SlideControlController {
     });
     response.flushHeaders()
 
-    const listener = (slide: {indexH: number, indexV: number}) => {
+    const listenerSlides = (slide: {indexH: number, indexV: number}) => {
       response.write(`event: slide.changed\ndata: ${JSON.stringify(slide)}\n\n`);
     }
-    this.eventEmitter.on("jumpToSlide", listener);
+    this.eventEmitter.on("jumpToSlide", listenerSlides);
+    const listenerPause = (pausedAt: number) => {
+      response.write(`event: paused\ndata:${pausedAt}\n\n`);
+    }
+    this.eventEmitter.on("pause", listenerPause);
 
     response.on("close", () => {
-      this.eventEmitter.off("jumpToSlide", listener);
+      this.eventEmitter.off("jumpToSlide", listenerSlides);
+      this.eventEmitter.off("jumpToSlide", listenerPause);
     })
   }
 

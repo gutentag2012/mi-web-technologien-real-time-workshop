@@ -1,0 +1,12 @@
+@startuml
+activate Client
+
+Client -> Server: GET /data
+activate Server
+Server --> Client: Return Data 1
+Server -> Server: Update Data
+Server --> Client: Return Data 2
+deactivate Server
+
+deactivate Client
+@enduml

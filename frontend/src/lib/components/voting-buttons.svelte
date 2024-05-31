@@ -3,6 +3,7 @@
   import {authToken, votesStore} from "$lib";
   import * as env from '$env/static/public'
 
+  export let customContainerStyle: string | undefined = undefined
   export let poll: string
   export let title: string | undefined = undefined
   export let options: string[] = ["Schon genutzt", "Davon gehört", "Noch unbekannt"]
@@ -44,9 +45,9 @@
   }
 </script>
 
-<div class="fixed top-0 right-0 flex flex-col gap-1 items-end bg-neutral-800 p-4 pr-0 rounded-bl-lg z-50">
+<div class={customContainerStyle ?? "fixed top-0 right-0 flex flex-col gap-1 items-end bg-neutral-800 p-4 pr-0 rounded-bl-lg z-50"}>
     {#if title}
-        <h6 class="text-lg pl-4 pr-4" style="margin-bottom: 8px;">{title}</h6>
+        <h6 class="text-lg pl-4 pr-4 max-w-lg" style="margin-bottom: 8px;">{title}</h6>
     {/if}
     {#each options as option, index}
         <div class="h-12 w-full bg-neutral-700 relative flex justify-between items-center py-2 px-4 rounded-l-2xl gap-10">

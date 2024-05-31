@@ -3,7 +3,7 @@
 
   import 'reveal.js/dist/reveal.css'
   import 'reveal.js/dist/theme/night.css'
-  import 'reveal.js/plugin/highlight/monokai.css'
+  // import 'reveal.js/plugin/highlight/monokai.css'
 
   import Slide from "$lib/components/slide.svelte";
   import Intro from './slides/1_IntroSlide.svelte'
@@ -12,8 +12,10 @@
   import Polling from './slides/4_1_PollingSlide.svelte'
   import ShortPolling from './slides/4_2_ShortPollingSlide.svelte'
   import LongPolling from './slides/4_3_LongPollingSlide.svelte'
+  import SSE from './slides/5_1_ServerSentEventsSlide.svelte'
+  import Break from './slides/6_BreakSlide.svelte'
 
-  import {authToken, revealSlides} from "$lib/index";
+  import {authToken, pausedTime, revealSlides} from "$lib/index";
   import Reveal from "reveal.js";
   import Markdown from "reveal.js/plugin/markdown/markdown";
   import Highlight from "reveal.js/plugin/highlight/highlight";
@@ -42,6 +44,11 @@
         $revealSlides.slide(eventData.indexH, eventData.indexV)
       })
 
+      slideEventSource.addEventListener("paused", sse => {
+        const eventData = JSON.parse(sse.data)
+        pausedTime.set(new Date(eventData as number))
+      })
+
       return
     }
 
@@ -63,12 +70,20 @@
         <Intro/>
         <Agenda/>
 
-        <Overview/>
+        <Slide animate>
+            <Overview/>
+        </Slide>
 
         <Slide animate>
             <Polling/>
             <ShortPolling/>
             <LongPolling/>
         </Slide>
+
+        <Slide animate>
+            <SSE />
+        </Slide>
+
+        <Break />
     </div>
 </div>

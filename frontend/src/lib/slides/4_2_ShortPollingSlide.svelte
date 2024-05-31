@@ -6,33 +6,53 @@
     const votingOptions = ["Schon genutzt", "Mal gesehen", "Nicht bekannt"]
 </script>
 
-<Slide animate className="h-full">
+<Slide animate className="h-full bg-topography">
     <Agenda selection={1}/>
 
     <VotingButtons poll="short_polling" title="Short Polling" options={votingOptions} />
 
-    <div class="flex flex-col h-full items-center justify-center">
+  <div class="flex flex-col h-full">
+    <div class="flex flex-col flex-1 items-center justify-center">
         <h4 class="max-w-2xl" data-id="title">Short Polling</h4>
 
         <div class="flex flex-row gap-8">
             <img src="ShortPolling.svg" alt="short-polling" width="400px">
         </div>
     </div>
+
+      <p data-id="footer" class="mt-auto text-lg">TH Köln - Webtechnologien - Joshua Gawenda</p>
+  </div>
 </Slide>
 
-<Slide animate className="h-full">
+<Slide animate className="h-full bg-topography">
     <Agenda selection={1}/>
 
     <VotingButtons poll="short_polling" title="Short Polling" options={votingOptions} />
 
-    <div class="flex flex-col h-full items-center justify-center">
+  <div class="flex flex-col h-full">
+    <div class="flex flex-col flex-1 items-center justify-center">
         <h4 class="max-w-2xl" data-id="title">Short Polling</h4>
 
-        <div class="flex flex-row gap-8 max-w-3xl text-xl">
-            <img src="ShortPolling.svg" alt="short-polling" width="300px">
 
-            <div>
-                <table>
+
+        <div class="mt-4 max-w-3xl text-xl">
+            <ul>
+                <li>Server sendet immer Antwort</li>
+                <li>Client hat einen festen Interval</li>
+                <li>Datenänderung muss beim Client gecheckt werden</li>
+                <li>
+                    Anwendung
+                    <ul class="list-disc ml-8">
+                        <li>Fremder Server</li>
+                        <li>100% Echtzeit nicht relevant</li>
+                        <li>Bandbreite kein Problem</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="flex flex-row gap-8 max-w-3xl text-xl mt-4">
+            <table>
                     <thead>
                     <tr>
                         <th>Pro</th>
@@ -62,7 +82,56 @@
                     </tr>
                     </tbody>
                 </table>
-            </div>
         </div>
+    </div>
+
+        <p data-id="footer" class="mt-auto text-lg">TH Köln - Webtechnologien - Joshua Gawenda</p>
+  </div>
+</Slide>
+
+<Slide animate className="h-full bg-topography">
+    <Agenda selection={1}/>
+
+    <VotingButtons poll="short_polling" title="Short Polling" options={votingOptions} />
+
+    <div class="h-full flex flex-col">
+    <div class="flex flex-col flex-1 items-center justify-center">
+        <h4 class="max-w-2xl" data-id="title">Short Polling</h4>
+
+        <pre>
+          client.js
+            <code class="h-full language-javascript" data-trim data-noescape data-line-numbers>
+            {`
+            function shortPoll() {
+                fetch('/api/data')
+                    .then(response => response.json())
+                    .then(data => {
+                        // Process the received data
+                    })
+
+                // Poll every 5 seconds
+                setTimeout(shortPoll, 5000);
+            }
+
+            // Start Short Polling
+            shortPoll();
+            `}
+            </code>
+        </pre>
+    </div>
+        <p data-id="footer" class="mt-auto text-lg">TH Köln - Webtechnologien - Joshua Gawenda</p>
+    </div>
+</Slide>
+
+<Slide animate className="h-full bg-topography">
+    <Agenda selection={1}/>
+
+    <div class="h-full flex flex-col">
+    <div class="flex flex-col flex-1 items-center justify-center">
+        <h4 class="max-w-2xl" data-id="title">Short Polling</h4>
+
+      <VotingButtons customContainerStyle="flex flex-col gap-1 items-end bg-neutral-800 p-4 rounded-bl-lg" poll="short_polling_opinion" title="Meinung zu Short Polling" options={["💪 Sehr nützliches Tool", "🤔 Sicher manchmal nützlich", "💣 Sollte mit Vorsicht genossen werden", "👎 Einfach nicht praktikabel"]} />
+    </div>
+        <p data-id="footer" class="mt-auto text-lg">TH Köln - Webtechnologien - Joshua Gawenda</p>
     </div>
 </Slide>

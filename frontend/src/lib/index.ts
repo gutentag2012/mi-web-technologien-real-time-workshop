@@ -3,6 +3,7 @@ import {writable} from "svelte/store";
 import {type Api} from "reveal.js";
 import * as env from '$env/static/public'
 
+export const pausedTime = writable<Date | null>(null)
 export const revealSlides = writable<Api>()
 export const authToken = writable<string>()
 export const votesStore = writable<Record<string, { votes: number[], ownVote?: number }>>({})

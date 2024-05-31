@@ -5,6 +5,7 @@ import {AuthModule} from './auth/auth.module';
 import {ConfigModule, ConfigService} from "@nestjs/config";
 import {JwtModule} from "@nestjs/jwt";
 import { SlideControlModule } from './slide-control/slide-control.module';
+import { SseModule } from './sse/sse.module';
 
 @Module({
   imports: [
@@ -21,7 +22,8 @@ import { SlideControlModule } from './slide-control/slide-control.module';
     EventEmitterModule.forRoot({global: true}),
     VotingModule,
     AuthModule,
-    SlideControlModule
+    SlideControlModule,
+    SseModule
   ],
   controllers: [],
   providers: [],
