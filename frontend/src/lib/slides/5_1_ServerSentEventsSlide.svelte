@@ -15,6 +15,30 @@
     <div class="flex flex-col flex-1 items-center justify-center">
         <h4 class="max-w-2xl" data-id="title">Server Sent Events (SSE)</h4>
 
+        <div class="text-xl mb-4">
+            <ul>
+                <li>2006 eingeführt in "WHATWG Web Applications 1.0"</li>
+                <li>Ursprünglich Server-sent DOM events</li>
+                <li>Seit ca. 2010 in meisten Browsern</li>
+                <li>HTTP/1.1 -> Limitierte Anzahl an Connections</li>
+                <li>HTTP/2 (2015) -> Connection Multiplexing</li>
+            </ul>
+        </div>
+    </div>
+
+        <p data-id="footer" class="mt-auto text-lg">TH Köln - Webtechnologien - Joshua Gawenda</p>
+    </div>
+</Slide>
+
+<Slide animate className="h-full bg-topography">
+    <Agenda selection={2}/>
+
+    <VotingButtons poll="sse" title="Server Sent Events" options={votingOptions} />
+
+    <div class="flex flex-col h-full">
+    <div class="flex flex-col flex-1 items-center justify-center">
+        <h4 class="max-w-2xl" data-id="title">Server Sent Events (SSE)</h4>
+
         <div class="flex flex-row gap-8">
             <img src="ServerSentEvents.svg" alt="server-sent-events" width="400px">
         </div>
@@ -40,6 +64,7 @@
                 <li>Server antwortet X mal</li>
                 <li>Unidirectional (Server &#8594; Client)</li>
                 <li>Text basierend</li>
+                <li>1 kontinuierlicher Stream</li>
                 <li>
                     Anwendung
                     <ul class="list-disc ml-8">
@@ -98,19 +123,18 @@
 
         <div class="text-xl mb-4">
             <ul>
+                <li>Felder separiert durch 1 <code>\n</code></li>
                 <li>Messages separiert durch 2 <code>\n</code></li>
-                <li>Data kann mehrfach in einer Message vorkommen</li>
-                <li>Event kann optional gesetzt werden</li>
-                <li>Kann nur GET schicken</li>
+                <li>Erstes Leerzeichen wird ignoriert</li>
             </ul>
         </div>
 
-      <pre class="max-w-4xl"><code class="language-markdown" data-trim data-noescape >{`
+      <pre class="max-w-4xl"><code class="language-markdown" data-trim data-noescape data-line-numbers="|1|2|3|4|5-6|7">{`
       : Comment (can be used for keep alive)
       retry: 10000
       id: 1234
       event: custom-event
-      data: some data here
+      data:some data here
       data: Data in a new line
       \\n
       `}</code></pre>
@@ -158,18 +182,21 @@
                 <li>Chrome Devtools</li>
                 <li>Authentication nicht über header</li>
                 <li>Nur im Browser</li>
+                <li>Kann nur GET schicken</li>
             </ul>
         </div>
 
+        <pre style="margin: 0">client.js</pre>
         <pre>
-          client.js
-            <code class="language-javascript" data-trim data-noescape data-line-numbers>
+            <code class="language-javascript" data-trim data-noescape data-line-numbers="|1|3-6|7-10">
               {`
                 const eventSource = new EventSource('/events');
 
+                // Listen for messages without event type
                 eventSource.onmessage = (event) => {
                   console.log(event.data);
                 };
+                // Listen for messages with event type
                 eventSource.addEventListener('custom-event', (event) => {
                   console.log(event.data);
                 });
@@ -190,9 +217,9 @@
     <div class="flex flex-col flex-1 items-center justify-center">
         <h4 class="max-w-2xl" data-id="title">Server Sent Events (SSE)<br>Client (fetch)</h4>
 
+        <pre style="margin: 0">client-with-fetch.js</pre>
         <pre>
-          client-with-fetch.js
-            <code class="language-javascript" data-trim data-noescape data-line-numbers style="max-height: unset;">
+            <code class="language-javascript" data-trim data-noescape data-line-numbers="|1|2-3|4|5|9-10|11|13|15-16" style="max-height: unset;">
               {`
                 fetch("/events").then(async res => {
                     if(!res.body) return console.error('No body')
@@ -208,7 +235,8 @@
 
                         if(!buffer.includes('\\n\\n')) continue
 
-                        const messages = parseMessages(buffer)
+                        const [messages, restBuffer] = parseMessages(buffer)
+                        buffer = restBuffer
                         // do something with messages
                     }
                 })
@@ -229,9 +257,9 @@
     <div class="flex flex-col flex-1 items-center justify-center">
         <h4 class="max-w-2xl" data-id="title">Server Sent Events (SSE)<br>Server</h4>
 
+        <pre style="margin: 0">server.js</pre>
         <pre>
-          server.js
-            <code class="language-javascript" data-trim data-noescape data-line-numbers style="max-height: unset">
+            <code class="language-javascript" data-trim data-noescape data-line-numbers="|2-6|8-12|14-19|21-24" style="max-height: unset">
               {`
                 async function handleSSERequest(req, res) {
                   res.writeHead(200, {
@@ -242,14 +270,14 @@
 
                   // send initial data
                   const currentData = await getData();
-                  res.write(\`event:initial\`)
-                  res.write(\`data:\${JSON.stringify(currentData)}\`);
+                  res.write(\`event:initial\\n\`)
+                  res.write(\`data:\${JSON.stringify(currentData)}\\n\`);
                   res.write('\\n\\n');
 
                   // wait for new data
                   const unsubscribe = addEventListener('newData', data => {
                     res.write('event:change\\n');
-                    res.write(\`data:\${JSON.stringify(data)}\`);
+                    res.write(\`data:\${JSON.stringify(data)}\\n\`);
                     res.write('\\n\\n');
                   });
 

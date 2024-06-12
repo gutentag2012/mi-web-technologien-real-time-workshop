@@ -28,7 +28,6 @@ import VotingButtons from "$lib/components/voting-buttons.svelte";
                     </li>
                     <li>Verbesserte UX</li>
                     <li>Erhöhte Produktivität</li>
-                    <li>Manches völlig unmöglich ohne</li>
                 </ul>
             </div>
         </div>

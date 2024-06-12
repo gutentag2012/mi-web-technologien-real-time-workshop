@@ -98,15 +98,14 @@
     <div class="flex flex-col flex-1 items-center justify-center">
         <h4 class="max-w-2xl" data-id="title">Short Polling</h4>
 
+        <pre style="margin: 0">client.js</pre>
         <pre>
-          client.js
-            <code class="h-full language-javascript" data-trim data-noescape data-line-numbers>
+            <code class="h-full language-javascript" data-trim data-noescape data-line-numbers="|12|2-5|7,8">
             {`
             function shortPoll() {
                 fetch('/api/data')
-                    .then(response => response.json())
-                    .then(data => {
-                        // Process the received data
+                    .then(response => {
+                        // Process the received response
                     })
 
                 // Poll every 5 seconds

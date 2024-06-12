@@ -13,6 +13,7 @@
   import ShortPolling from './slides/4_2_ShortPollingSlide.svelte'
   import LongPolling from './slides/4_3_LongPollingSlide.svelte'
   import SSE from './slides/5_1_ServerSentEventsSlide.svelte'
+  import SSEAssignment from './slides/5_2_ServerSentEventsAssignmentSlide.svelte'
   import Break from './slides/6_BreakSlide.svelte'
 
   import {authToken, pausedTime, revealSlides} from "$lib/index";
@@ -83,6 +84,7 @@
         <Slide animate>
             <SSE />
         </Slide>
+        <SSEAssignment />
 
         <Break />
     </div>

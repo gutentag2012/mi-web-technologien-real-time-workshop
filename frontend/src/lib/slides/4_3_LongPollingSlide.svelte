@@ -65,14 +65,10 @@
                     </tr>
                     <tr>
                         <td class="text-nowrap">Reduziert Netzwerkbelastung</td>
-                        <td class="text-nowrap">Overhead durch Anzahl der Requests</td>
-                    </tr>
-                    <tr>
-                        <td class="text-nowrap">Simple auf Server zu implementieren</td>
                         <td class="text-nowrap">Nicht geeignet für "schnelle" Daten</td>
                     </tr>
                     <tr>
-                        <td></td>
+                        <td class="text-nowrap">Simple auf Server zu implementieren</td>
                         <td class="text-nowrap">Stateverlust durch mehrere Requests</td>
                     </tr>
                     </tbody>
@@ -93,16 +89,15 @@
     <div class="flex flex-col flex-1 items-center justify-center">
         <h4 class="max-w-2xl" data-id="title">Long Polling</h4>
 
+        <pre style="margin: 0">client.js</pre>
         <pre>
-          client.js
-            <code class="language-javascript" data-trim data-noescape data-line-numbers>
+            <code class="language-javascript" data-trim data-noescape data-line-numbers="|9|2|3-6">
               {`
                 function longPolling() {
                   fetch('https://api.example.com/updates')
-                    .then(response => response.json())
-                    .then(data => {
-                      // do something with data
+                    .then(reponse => {
                       longPolling();
+                      // do something with response
                     });
                 }
 
@@ -124,9 +119,9 @@
     <div class="flex flex-col flex-1 items-center justify-center">
         <h4 class="max-w-2xl" data-id="title">Long Polling</h4>
 
+        <pre style="margin: 0">server.js</pre>
         <pre>
-          server.js
-            <code class="language-javascript" data-trim data-noescape data-line-numbers style="max-height: unset">
+            <code class="language-javascript" data-trim data-noescape data-line-numbers="|2-5|7-10" style="max-height: unset">
               {`
                 function handleLongPollingRequest(req, res) {
                   // wait for new data
@@ -134,7 +129,7 @@
                     res.json(data);
                   });
 
-                  // cleanup state when client closes connection
+                  // cleanup state when connection is closed
                   req.on('close', () => {
                     unsubscribe();
                   });
