@@ -15,6 +15,7 @@
   import SSE from './slides/5_1_ServerSentEventsSlide.svelte'
   import SSEAssignment from './slides/5_2_ServerSentEventsAssignmentSlide.svelte'
   import Break from './slides/6_BreakSlide.svelte'
+  import WebSocket from './slides/7_1_WebsocketSlide.svelte'
 
   import {authToken, pausedTime, revealSlides} from "$lib/index";
   import Reveal from "reveal.js";
@@ -87,5 +88,9 @@
         <SSEAssignment />
 
         <Break />
+
+        <Slide animate>
+            <WebSocket />
+        </Slide>
     </div>
 </div>

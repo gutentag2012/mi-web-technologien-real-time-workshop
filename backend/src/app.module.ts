@@ -6,6 +6,7 @@ import {ConfigModule, ConfigService} from "@nestjs/config";
 import {JwtModule} from "@nestjs/jwt";
 import { SlideControlModule } from './slide-control/slide-control.module';
 import { SseModule } from './sse/sse.module';
+import { WebsocketsModule } from './websockets/websockets.module';
 
 @Module({
   imports: [
@@ -23,7 +24,8 @@ import { SseModule } from './sse/sse.module';
     VotingModule,
     AuthModule,
     SlideControlModule,
-    SseModule
+    SseModule,
+    WebsocketsModule
   ],
   controllers: [],
   providers: [],

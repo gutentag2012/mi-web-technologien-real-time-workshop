@@ -1,0 +1,13 @@
+@startuml
+activate Client
+
+Client -> Server: UPGRADE /data
+activate Server
+Server --> Client: OK
+Server --> Client: Return Data 1
+Server -> Server: Update Data
+Server --> Client: Return Data 2
+deactivate Server
+
+deactivate Client
+@enduml
