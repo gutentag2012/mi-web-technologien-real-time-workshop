@@ -37,7 +37,7 @@
         </div>
 
         <div class="flex flex-col items-center mb-24">
-            <h5 class="max-w-2xl" style="margin-bottom: 0; margin-top: 16px">2. Server (server/index.js</h5>
+            <h5 class="max-w-2xl" style="margin-bottom: 0; margin-top: 16px">2. Server (server/index.js)</h5>
 
             <p class="max-w-7xl text-2xl">Ändere den Endpunkt im Frontend auf "ws://localhost:8080" und implementiere einen simplen WebSocketServer welcher:</p>
 
