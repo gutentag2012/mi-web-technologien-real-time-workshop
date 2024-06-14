@@ -6,10 +6,6 @@
     const votingOptions = ["Schon genutzt", "Mal gesehen", "Nicht bekannt"]
 </script>
 
-<!-- TODO Mention native websocket upgrade handling -->
-<!-- TODO That events are by default not supported -->
-<!-- TODO Mention, that there is also a SSE implementation of the chat -->
-
 <Slide animate className="h-full bg-topography">
     <Agenda selection={4}/>
 
@@ -189,7 +185,7 @@
 
         <div class="text-xl mb-4">
             <ul>
-                <li>Auch mit default <strong>http</strong> module möglich</li>
+                <li>Auch mit default <strong>http</strong> module möglich (UPGRADE handler)</li>
             </ul>
         </div>
 

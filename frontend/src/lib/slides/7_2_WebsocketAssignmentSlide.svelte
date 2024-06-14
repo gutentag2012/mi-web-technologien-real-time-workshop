@@ -53,6 +53,8 @@
                 <li><strong class="text-rose-600">message</strong>: Die enthaltene Nachricht.</li>
                 <li><strong class="text-rose-600">timestamp</strong>: Ein timestamp, welcher vom Server gesetzt werden soll.</li>
             </ul>
+
+            <p class="max-w-7xl text-2xl">Es gibt auch eine SSE version in den <strong>index.sse.js</strong> Files.</p>
         </div>
     </div>
         <p data-id="footer" class="mt-auto text-lg">TH Köln - Webtechnologien - Joshua Gawenda</p>
