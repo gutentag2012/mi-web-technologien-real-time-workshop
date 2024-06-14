@@ -1,0 +1,34 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+
+if (Do you have authority over the server?) then (yes)
+    if (Do you need bidirectional communication?) then (yes)
+        if (Do you need media streaming?) then (yes)
+            :Use WebRTC;
+            stop
+        else (no)
+            if (Do you have a lot of Client->Server communication?) then (no)
+                :Use Server-Sent Events with POST;
+                stop
+            else (yes)
+                if (Do you need the cutting edge with modern features?) then (yes)
+                    :Use WebTransport;
+                    stop
+                else (no)
+                    :Use WebSockets;
+                    stop
+                endif
+            endif
+        endif
+    else (no)
+        :Use Server-Sent Events;
+        stop
+    endif
+else (no)
+    :Use Short Polling;
+    stop
+endif
+
+@enduml
