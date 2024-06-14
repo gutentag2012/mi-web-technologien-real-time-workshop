@@ -7,6 +7,9 @@ Server --> Client: OK
 Server --> Client: Return Data 1
 Server -> Server: Update Data
 Server --> Client: Return Data 2
+Client -> Server: Request update
+Server -> Server: Update Data
+Server --> Client: Return Data 3
 deactivate Server
 
 deactivate Client

@@ -19,3 +19,5 @@ setFormDisabledState(true)
 // TODO 2.2: If the incoming message is a 'chat.message' event, append the message to the chat window
 
 // TODO 3: Set form submit handler to send chat messages to the server
+setOnSubmit((username, message) => {
+})

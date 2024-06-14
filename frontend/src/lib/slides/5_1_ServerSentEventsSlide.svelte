@@ -62,7 +62,7 @@
                 <li>Regulärer HTTP-Request</li>
                 <li>Client schickt 1 Request</li>
                 <li>Server antwortet X mal</li>
-                <li>Unidirectional (Server &#8594; Client)</li>
+                <li>Unidirektional (Server &#8594; Client)</li>
                 <li>Text basierend</li>
                 <li>1 kontinuierlicher Stream</li>
                 <li>
@@ -89,7 +89,7 @@
                     <tbody>
                     <tr>
                         <td class="text-nowrap">Echtzeit Kommunikation</td>
-                        <td class="text-nowrap">Nur Unidirectional</td>
+                        <td class="text-nowrap">Nur Unidirektional</td>
                     </tr>
                     <tr>
                         <td class="text-nowrap">Reduziert Netzwerkbelastung</td>

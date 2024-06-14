@@ -9,8 +9,8 @@
     <Agenda selection={2}/>
 
     <div class="flex flex-col h-full">
-    <div class="flex flex-col flex-1 items-center justify-between">
-        <h4 class="max-w-2xl" data-id="title">Aufgabe - SSE Chat</h4>
+    <div class="flex flex-col flex-1 items-center justify-between pt-8">
+        <h4 class="max-w-2xl" data-id="title">Aufgabe - SSE Notifications</h4>
 
         <div class="flex flex-col items-center">
             <h5 class="max-w-2xl" style="margin: 0">1. Client (client/index.js)</h5>
@@ -28,6 +28,7 @@
             <ul class="text-2xl">
                 <li><strong class="text-rose-600">resetTable</strong>: Löscht alle Notifications im Table.</li>
                 <li><strong class="text-rose-600">addToTable</strong>: Fügt eine Notification zum Table hinzu.</li>
+                <li><strong class="text-rose-600">resetTable</strong>: Löscht alle Notifications im Table.</li>
                 <li><strong class="text-rose-600">flashNotification</strong>: Flashed eine notification in einem toast.</li>
                 <li><strong class="text-rose-600">updateFlashNotification</strong>: Updated eine notification in einem toast.</li>
             </ul>

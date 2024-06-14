@@ -57,6 +57,17 @@ export function appendMessage(username, message, timestamp) {
     messages.scrollTop = messages.scrollHeight
 }
 
+/**
+ * @callback OnSubmitMethod
+ * @param {string} username - The username
+ * @param {string} message - The message typed in
+ * @returns {void}
+ */
+
+/**
+ * Set the form submit handler to send chat messages to the server
+ * @param {OnSubmitMethod} callback
+ */
 export function setOnSubmit(callback) {
     form.addEventListener('submit', function (e) {
         e.preventDefault()
