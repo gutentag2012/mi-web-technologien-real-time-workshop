@@ -4,6 +4,7 @@
     import VotingButtons from "$lib/components/voting-buttons.svelte";
 
     const votingOptions = ["Schon genutzt", "Mal gesehen", "Nicht bekannt"]
+    const isInPrintMode = window.location.search.includes("print-pdf");
 </script>
 
 <Slide animate className="h-full bg-topography">
@@ -91,7 +92,7 @@
 
         <pre style="margin: 0">client.js</pre>
         <pre>
-            <code class="language-javascript" data-trim data-noescape data-line-numbers="|9|2|3-6">
+            <code class="language-javascript" data-trim data-noescape data-line-numbers={isInPrintMode ? "" : "|9|2|3-6"}>
               {`
                 function longPolling() {
                   fetch('https://api.example.com/updates')
@@ -121,7 +122,7 @@
 
         <pre style="margin: 0">server.js</pre>
         <pre>
-            <code class="language-javascript" data-trim data-noescape data-line-numbers="|2-5|7-10" style="max-height: unset">
+            <code class="language-javascript" data-trim data-noescape data-line-numbers={isInPrintMode ? "" : "|2-5|7-10"} style="max-height: unset">
               {`
                 function handleLongPollingRequest(req, res) {
                   // wait for new data
@@ -142,6 +143,7 @@
     </div>
 </Slide>
 
+{#if !isInPrintMode}
 <Slide animate className="h-full bg-topography">
     <Agenda selection={1}/>
 
@@ -154,3 +156,4 @@
         <p data-id="footer" class="mt-auto text-lg">TH Köln - Webtechnologien - Joshua Gawenda</p>
     </div>
 </Slide>
+{/if}

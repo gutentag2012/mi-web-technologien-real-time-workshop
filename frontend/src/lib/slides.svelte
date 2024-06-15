@@ -66,6 +66,8 @@
       })
     })
   })
+
+  const isInPrintMode = window.location.search.includes("print-pdf");
 </script>
 
 <div class="reveal">
@@ -88,7 +90,9 @@
         </Slide>
         <SSEAssignment />
 
-        <Break />
+        {#if !isInPrintMode}
+            <Break />
+        {/if}
 
         <Slide animate>
             <WebSocket />

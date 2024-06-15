@@ -4,6 +4,7 @@
     import VotingButtons from "$lib/components/voting-buttons.svelte";
 
     const votingOptions = ["Schon genutzt", "Mal gesehen", "Nicht bekannt"]
+    const isInPrintMode = window.location.search.includes("print-pdf");
 </script>
 
 <Slide animate className="h-full bg-topography">
@@ -129,7 +130,7 @@
             </ul>
         </div>
 
-      <pre class="max-w-4xl"><code class="language-markdown" data-trim data-noescape data-line-numbers="|1|2|3|4|5-6|7">{`
+      <pre class="max-w-4xl"><code class="language-markdown" data-trim data-noescape data-line-numbers={isInPrintMode ? "" : "|1|2|3|4|5-6|7"}>{`
       : Comment (can be used for keep alive)
       retry: 10000
       id: 1234
@@ -188,7 +189,7 @@
 
         <pre style="margin: 0">client.js</pre>
         <pre>
-            <code class="language-javascript" data-trim data-noescape data-line-numbers="|1|3-6|7-10">
+            <code class="language-javascript" data-trim data-noescape data-line-numbers={isInPrintMode ? "" : "|1|3-6|7-10"}>
               {`
                 const eventSource = new EventSource('/events');
 
@@ -219,7 +220,7 @@
 
         <pre style="margin: 0">client-with-fetch.js</pre>
         <pre>
-            <code class="language-javascript" data-trim data-noescape data-line-numbers="|1|2-3|4|5|9-10|11|13|15-16" style="max-height: unset;">
+            <code class="language-javascript" data-trim data-noescape data-line-numbers={isInPrintMode ? "" : "|1|2-3|4|5|9-10|11|13|15-16"} style="max-height: unset;">
               {`
                 fetch("/events").then(async res => {
                     if(!res.body) return console.error('No body')
@@ -259,7 +260,7 @@
 
         <pre style="margin: 0">server.js</pre>
         <pre>
-            <code class="language-javascript" data-trim data-noescape data-line-numbers="|2-6|8-12|14-19|21-24" style="max-height: unset">
+            <code class="language-javascript" data-trim data-noescape data-line-numbers={isInPrintMode ? "" : "|2-6|8-12|14-19|21-24"} style="max-height: unset">
               {`
                 async function handleSSERequest(req, res) {
                   res.writeHead(200, {
@@ -294,6 +295,7 @@
     </div>
 </Slide>
 
+{#if !isInPrintMode}
 <Slide animate className="h-full bg-topography">
     <Agenda selection={2}/>
 
@@ -306,3 +308,4 @@
         <p data-id="footer" class="mt-auto text-lg">TH Köln - Webtechnologien - Joshua Gawenda</p>
     </div>
 </Slide>
+{/if}

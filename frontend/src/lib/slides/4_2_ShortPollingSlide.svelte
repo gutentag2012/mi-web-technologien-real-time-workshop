@@ -4,6 +4,7 @@
     import VotingButtons from "$lib/components/voting-buttons.svelte";
 
     const votingOptions = ["Schon genutzt", "Mal gesehen", "Nicht bekannt"]
+    const isInPrintMode = window.location.search.includes("print-pdf");
 </script>
 
 <Slide animate className="h-full bg-topography">
@@ -100,7 +101,7 @@
 
         <pre style="margin: 0">client.js</pre>
         <pre>
-            <code class="h-full language-javascript" data-trim data-noescape data-line-numbers="|12|2-5|7,8">
+            <code class="h-full language-javascript" data-trim data-noescape data-line-numbers={isInPrintMode ? "" : "|12|2-5|7,8"}>
             {`
             function shortPoll() {
                 fetch('/api/data')
@@ -122,6 +123,8 @@
     </div>
 </Slide>
 
+
+{#if !isInPrintMode}
 <Slide animate className="h-full bg-topography">
     <Agenda selection={1}/>
 
@@ -134,3 +137,4 @@
         <p data-id="footer" class="mt-auto text-lg">TH Köln - Webtechnologien - Joshua Gawenda</p>
     </div>
 </Slide>
+{/if}

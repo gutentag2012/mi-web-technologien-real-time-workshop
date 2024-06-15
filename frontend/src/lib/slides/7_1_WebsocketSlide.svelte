@@ -4,6 +4,7 @@
     import VotingButtons from "$lib/components/voting-buttons.svelte";
 
     const votingOptions = ["Schon genutzt", "Mal gesehen", "Nicht bekannt"]
+    const isInPrintMode = window.location.search.includes("print-pdf");
 </script>
 
 <Slide animate className="h-full bg-topography">
@@ -142,7 +143,7 @@
 
         <pre style="margin: 0">client.js</pre>
         <pre>
-            <code class="language-javascript" data-trim data-noescape data-line-numbers="|1-2|4-7|9-12|14-17|19-22" style="max-height: unset;">
+            <code class="language-javascript" data-trim data-noescape data-line-numbers={isInPrintMode ? "" : "|1-2|4-7|9-12|14-17|19-22"} style="max-height: unset;">
               {`
                 // Open new WebSocket connection
                 const ws = new WebSocket('ws://localhost:8080');
@@ -191,7 +192,7 @@
 
         <pre style="margin: 0">server.js</pre>
         <pre>
-            <code class="language-javascript" data-trim data-noescape data-line-numbers="|1-2|3-4|6-9|11-13,27|15-18|20-23|25-26" style="max-height: unset">
+            <code class="language-javascript" data-trim data-noescape data-line-numbers={isInPrintMode ? "" : "|1-2|3-4|6-9|11-13,27|15-18|20-23|25-26"} style="max-height: unset">
               {`
                 // Using the 'ws' package, this could also be done with socket.io
                 import {WebSocketServer} from 'ws';
@@ -228,6 +229,7 @@
     </div>
 </Slide>
 
+{#if !isInPrintMode}
 <Slide animate className="h-full bg-topography">
     <Agenda selection={4}/>
 
@@ -240,3 +242,4 @@
         <p data-id="footer" class="mt-auto text-lg">TH Köln - Webtechnologien - Joshua Gawenda</p>
     </div>
 </Slide>
+{/if}

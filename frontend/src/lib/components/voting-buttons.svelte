@@ -43,8 +43,11 @@
       },
     })
   }
+
+  const isInPrintMode = window.location.search.includes("print-pdf");
 </script>
 
+{#if !isInPrintMode}
 <div class={customContainerStyle ?? "fixed top-0 right-0 flex flex-col gap-1 items-end bg-neutral-800 p-4 pr-0 rounded-bl-lg z-50"}>
     {#if title}
         <h6 class="text-lg pl-4 pr-4 max-w-lg" style="margin-bottom: 8px;">{title}</h6>
@@ -72,3 +75,4 @@
         transition: width 0.3s cubic-bezier(.25, 1.24, .85, 1.27);
     }
 </style>
+{/if}

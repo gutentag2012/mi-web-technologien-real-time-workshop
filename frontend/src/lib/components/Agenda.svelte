@@ -2,8 +2,11 @@
     import TimeBadge from './time-badge.svelte'
     export let big = false
     export let selection = -1
+
+    const isInPrintMode = window.location.search.includes("print-pdf");
 </script>
 
+{#if !isInPrintMode || big}
 <ol class={big ? "text-xl" : "fixed top-4 left-4 text-sm"}>
     <li class:text-amber-300={selection === 0} class:opacity-60={!big && selection !== 0}>
         <TimeBadge big={big} time={5} />
@@ -47,3 +50,4 @@
         <span>Zusammenfassung</span>
     </li>
 </ol>
+{/if}
