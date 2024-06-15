@@ -1,0 +1,3 @@
+[submodule "workshop-assignments"]
+	path = workshop-assignments
+	url = https://github.com/gutentag2012/mi-web-technologien-real-time-workshop-assignments.git
