@@ -39,7 +39,7 @@ export class SlideControlController {
 
     response.on("close", () => {
       this.eventEmitter.off("jumpToSlide", listenerSlides);
-      this.eventEmitter.off("jumpToSlide", listenerPause);
+      this.eventEmitter.off("pause", listenerPause);
     })
   }
 
