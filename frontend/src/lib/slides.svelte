@@ -17,6 +17,9 @@
   import Break from './slides/6_BreakSlide.svelte'
   import WebSocket from './slides/7_1_WebsocketSlide.svelte'
   import WebSocketAssignment from './slides/7_2_WebsocketAssignmentSlide.svelte'
+  import Other from './slides/8_OtherSlide.svelte'
+  import Summary from './slides/9_SummarySlide.svelte'
+  import Thanks from './slides/10_ThanksSlide.svelte'
 
   import {authToken, pausedTime, revealSlides} from "$lib/index";
   import Reveal from "reveal.js";
@@ -98,5 +101,15 @@
             <WebSocket />
         </Slide>
         <WebSocketAssignment />
+
+        <Slide animate>
+            <Other />
+        </Slide>
+
+        <Summary />
+
+        {#if !isInPrintMode}
+            <Thanks />
+        {/if}
     </div>
 </div>

@@ -45,7 +45,7 @@
         <TimeBadge big={big} time={10} />
         <span>Andere Technologien</span>
     </li>
-    <li class:text-amber-300={selection === 6} class:opacity-60={!big && selection !== 5} class="mt-2">
+    <li class:text-amber-300={selection === 6} class:opacity-60={!big && selection !== 6} class="mt-2">
         <TimeBadge big={big} time={5} />
         <span>Zusammenfassung</span>
     </li>

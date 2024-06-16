@@ -3,31 +3,31 @@
 
 start
 
-if (Do you have authority over the server?) then (yes)
-    if (Do you need bidirectional communication?) then (yes)
-        if (Do you need media streaming?) then (yes)
-            :Use WebRTC;
+if (Zugriff auf Server?) then (Ja)
+    if (Bidirektional benötigt?) then (Ja)
+        if (Media Streams nötig?) then (Ja)
+            :WebRTC;
             stop
-        else (no)
-            if (Do you have a lot of Client->Server communication?) then (no)
-                :Use Server-Sent Events with POST;
-                stop
-            else (yes)
-                if (Do you need the cutting edge with modern features?) then (yes)
-                    :Use WebTransport;
+        else (Nein)
+            if (Viel Client->Server Kommunikation?) then (Ja)
+                if (Neuestes nötig?) then (Ja)
+                    :WebTransport;
                     stop
-                else (no)
-                    :Use WebSockets;
+                else (Nein)
+                    :WebSockets;
                     stop
                 endif
+            else (Nein)
+                :Server-Sent Events + POST;
+                stop
             endif
         endif
-    else (no)
-        :Use Server-Sent Events;
+    else (Nein)
+        :Server-Sent Events;
         stop
     endif
-else (no)
-    :Use Short Polling;
+else (Nein)
+    :Short Polling;
     stop
 endif
 
