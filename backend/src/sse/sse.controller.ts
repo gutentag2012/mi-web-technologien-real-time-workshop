@@ -46,7 +46,11 @@ export class SseController {
     res.writeHead(200, {
       'Content-Type': 'text/event-stream',
       'Cache-Control': 'no-cache',
-      'Connection': 'keep-alive'
+      'Connection': 'keep-alive',
+      // Cors headers
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET',
+      'Access-Control-Allow-Headers': 'Content-Type',
     });
 
     let messagesReceived = 0
