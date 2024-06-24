@@ -4,6 +4,7 @@
     import VotingButtons from "$lib/components/voting-buttons.svelte";
     import {authToken, pausedTime} from "$lib";
     import * as env from '$env/static/public'
+    import {fetchRetry} from "$lib/fetchRetry";
 
     const BREAK_DURATION = 10 * 60 * 1000
 
@@ -17,13 +18,13 @@
         const timeStarted = new Date()
         pausedTime.set(timeStarted)
 
-        fetch(`${env.PUBLIC_BACKEND_URL}/slide-control/pause`, {
+        fetchRetry(`${env.PUBLIC_BACKEND_URL}/slide-control/pause`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${$authToken}`
             },
-            body: JSON.stringify({timeStarted: timeStarted.getTime()})
+            body: JSON.stringify({timeStarted: timeStarted.getTime()}),
         })
     }
 

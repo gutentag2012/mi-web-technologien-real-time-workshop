@@ -27,6 +27,7 @@
   import Highlight from "reveal.js/plugin/highlight/highlight";
   import Notes from "reveal.js/plugin/notes/notes";
   import * as env from '$env/static/public'
+  import {fetchRetry} from "$lib/fetchRetry";
 
   onMount(() => {
     revealSlides.set(new Reveal({
@@ -59,7 +60,7 @@
     }
 
     $revealSlides.on('slidechanged', (event: { indexh: number; indexv: number }) => {
-      return fetch(`${env.PUBLIC_BACKEND_URL}/slide-control/jumpTo`, {
+      return fetchRetry(`${env.PUBLIC_BACKEND_URL}/slide-control/jumpTo`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

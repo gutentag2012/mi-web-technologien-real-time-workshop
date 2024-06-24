@@ -38,7 +38,3 @@ eventSource.addEventListener("votes.reset", e => {
     return v
   })
 })
-
-votesStore.subscribe((data) => {
-  console.log(data)
-})
