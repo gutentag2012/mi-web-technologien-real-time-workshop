@@ -14,7 +14,7 @@
 
     <div class="flex flex-col h-full">
     <div class="flex flex-col flex-1 items-center justify-center">
-        <h4 class="max-w-2xl" data-id="title">WebRTC</h4>
+        <h4 class="max-w-2xl" data-id="title">WebTransport</h4>
 
         <div class="text-xl mb-4">
             <ul>
@@ -56,7 +56,7 @@
 
     <div class="flex flex-col h-full">
     <div class="flex flex-col flex-1 items-center justify-center">
-        <h4 class="max-w-2xl" data-id="title">WebTransport</h4>
+        <h4 class="max-w-2xl" data-id="title">WebRTC</h4>
 
         <div class="text-xl mb-4">
             <ul>
