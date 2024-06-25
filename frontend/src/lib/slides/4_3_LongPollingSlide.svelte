@@ -92,16 +92,17 @@
 
         <pre style="margin: 0">client.js</pre>
         <pre>
-            <code class="language-javascript" data-trim data-noescape data-line-numbers={isInPrintMode ? "" : "|9|2|3-6"}>
+            <code class="language-javascript" data-trim data-noescape data-line-numbers={isInPrintMode ? "" : "|9-10|2|3-6"}>
               {`
                 function longPolling() {
                   fetch('https://api.example.com/updates')
-                    .then(reponse => {
+                    .finally(reponse => {
                       longPolling();
                       // do something with response
                     });
                 }
 
+                // Start Long Polling
                 longPolling();
               `}
             </code>

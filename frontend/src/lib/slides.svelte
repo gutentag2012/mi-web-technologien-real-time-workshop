@@ -21,13 +21,11 @@
   import Summary from './slides/9_SummarySlide.svelte'
   import Thanks from './slides/10_ThanksSlide.svelte'
 
-  import {authToken, pausedTime, revealSlides} from "$lib/index";
+  import {authToken, changeSlide, revealSlides} from "$lib/index";
   import Reveal from "reveal.js";
   import Markdown from "reveal.js/plugin/markdown/markdown";
   import Highlight from "reveal.js/plugin/highlight/highlight";
   import Notes from "reveal.js/plugin/notes/notes";
-  import * as env from '$env/static/public'
-  import {fetchRetry} from "$lib/fetchRetry";
 
   onMount(() => {
     revealSlides.set(new Reveal({
@@ -44,30 +42,11 @@
     $revealSlides.initialize()
 
     if (!$authToken) {
-      const slideEventSource = new EventSource(`${env.PUBLIC_BACKEND_URL}/slide-control/listen`)
-
-      slideEventSource.addEventListener("slide.changed", sse => {
-        const eventData = JSON.parse(sse.data)
-        $revealSlides.slide(eventData.indexH, eventData.indexV)
-      })
-
-      slideEventSource.addEventListener("paused", sse => {
-        const eventData = JSON.parse(sse.data)
-        pausedTime.set(new Date(eventData as number))
-      })
-
       return
     }
 
     $revealSlides.on('slidechanged', (event: { indexh: number; indexv: number }) => {
-      return fetchRetry(`${env.PUBLIC_BACKEND_URL}/slide-control/jumpTo`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${$authToken}`
-        },
-        body: JSON.stringify({indexH: event.indexh, indexV: event.indexv})
-      })
+        changeSlide(event.indexh, event.indexv)
     })
   })
 

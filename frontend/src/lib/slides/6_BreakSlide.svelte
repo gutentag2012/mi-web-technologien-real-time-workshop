@@ -2,7 +2,7 @@
     import Slide from "$lib/components/slide.svelte";
     import Agenda from "$lib/components/Agenda.svelte";
     import VotingButtons from "$lib/components/voting-buttons.svelte";
-    import {authToken, pausedTime} from "$lib";
+    import {authToken, pausedTime, pauseSlides} from "$lib";
     import * as env from '$env/static/public'
     import {fetchRetry} from "$lib/fetchRetry";
 
@@ -17,15 +17,7 @@
 
         const timeStarted = new Date()
         pausedTime.set(timeStarted)
-
-        fetchRetry(`${env.PUBLIC_BACKEND_URL}/slide-control/pause`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${$authToken}`
-            },
-            body: JSON.stringify({timeStarted: timeStarted.getTime()}),
-        })
+        pauseSlides(timeStarted.getTime())
     }
 
     $: {

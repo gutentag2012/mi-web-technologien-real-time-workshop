@@ -1,6 +1,6 @@
 <script lang="ts">
   import {onMount} from "svelte";
-  import {authToken, votesStore} from "$lib";
+  import {authToken, resetVotes, votePoll, votesStore} from "$lib";
   import * as env from '$env/static/public'
   import {fetchRetry} from "$lib/fetchRetry";
 
@@ -26,23 +26,11 @@
       })
     }
 
-      fetchRetry(`${env.PUBLIC_BACKEND_URL}/voting/${poll}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({voteIndex}),
-    })
+      votePoll(poll, voteIndex)
   }
 
   const reset = () => {
-      fetchRetry(`${env.PUBLIC_BACKEND_URL}/voting/${poll}/reset`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${$authToken}`,
-      },
-    })
+      resetVotes(poll)
   }
 
   const isInPrintMode = window.location.search.includes("print-pdf");
