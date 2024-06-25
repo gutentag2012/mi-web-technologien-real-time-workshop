@@ -15,7 +15,7 @@
         <div class="flex flex-col items-center">
             <h5 class="max-w-2xl" style="margin: 0">1. Client (client/index.js)</h5>
 
-            <p class="max-w-7xl text-2xl">Nutze die <strong class="text-rose-600">WebSocket</strong> Browser API um von der URL "{env.PUBLIC_BACKEND_URL.replace("http", "ws").replace(":3000", "")}:8080" chat events zu erhalten und zu senden. Lies folgende Events aus und zeige die Daten im Frontend an und sende Chats an den Server:</p>
+            <p class="max-w-7xl text-2xl">Nutze die <strong class="text-rose-600">WebSocket</strong> Browser API um von der URL "{env.PUBLIC_BACKEND_URL.replace("http", "ws")}" chat events zu erhalten und zu senden. Lies folgende Events aus und zeige die Daten im Frontend an und sende Chats an den Server:</p>
 
             <p class="max-w-7xl text-2xl">Der Server imitiert events in der Kommunikation, von daher sind alle gesendeten und empfangenen Daten im Format <strong>{'{'} "event": "some event", "data": ... {'}'}</strong>. Hier alle events:</p>
 

@@ -22,7 +22,7 @@ const newTimeStamp = () => {
   return `${day}.${month}.${year} ${hour}:${minute}:${seconds}`
 }
 
-@WebSocketGateway(8080)
+@WebSocketGateway(0)
 export class WebsocketsGateway implements OnGatewayConnection{
 
   constructor(private readonly votingService: VotingService, private readonly eventEmitter: EventEmitter2) {
